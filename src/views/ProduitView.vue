@@ -20,6 +20,26 @@
           <td>{{ produits.unitesEnStock }}</td>
           <td>{{ produits.unitesCommandees }}</td>
         </tr>
+        <td>
+          <button @click="page=1">
+            Premiere page
+          </button>
+        </td>
+        <td>
+          <button @click=page=page-1>
+            Precedente
+          </button>
+        </td>
+        <td>
+          <button @click=page=page-1>
+            Suivante
+          </button>
+        </td>
+        <td>
+          <button @click="deleteEntity(categorie._links.self.href)">
+            Derniere page
+          </button>
+        </td>
       </table>
     </div>
   </main>
@@ -48,7 +68,7 @@ function chargeProduits() {
   // Appel à l'API pour avoir la liste des catégories
   // Trié par code, descendant
   // Verbe HTTP GET par défaut
-  doAjaxRequest(BACKEND + "/api/produits?sort=nom")
+  doAjaxRequest(BACKEND + "/api/produits?sort=nom&page="date.page"&size=6")
       .then((json) => {
         data.listeProduit = json._embedded.produits;
       })
